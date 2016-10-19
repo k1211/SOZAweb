@@ -21,7 +21,7 @@ namespace SOZA_web.Models
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()
-            : base("DefaultConnection", throwIfV1Schema: false)
+            : base("SozaDb", throwIfV1Schema: false)
         {
         }
 
