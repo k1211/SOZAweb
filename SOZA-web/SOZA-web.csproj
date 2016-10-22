@@ -171,6 +171,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AndroidHelper.cs" />
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
@@ -180,6 +181,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\WebApi\AndroidTokenApiController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -187,10 +189,16 @@
     <Compile Include="Migrations\201610190642063_AspNetIdentityModel.Designer.cs">
       <DependentUpon>201610190642063_AspNetIdentityModel.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201610210846186_AndroidTokensTable.cs" />
+    <Compile Include="Migrations\201610210846186_AndroidTokensTable.Designer.cs">
+      <DependentUpon>201610210846186_AndroidTokensTable.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Database\ApplicationUser.cs" />
+    <Compile Include="Models\ViewModels\AccountViewModels.cs" />
+    <Compile Include="Models\Database\AndroidClient.cs" />
+    <Compile Include="Models\Database\ApplicationDbContext.cs" />
+    <Compile Include="Models\ViewModels\ManageViewModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -203,7 +211,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <None Include="Properties\PublishProfiles\soza - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\soza - Web Deploy.pubxml">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -269,6 +279,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201610190642063_AspNetIdentityModel.resx">
       <DependentUpon>201610190642063_AspNetIdentityModel.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201610210846186_AndroidTokensTable.resx">
+      <DependentUpon>201610210846186_AndroidTokensTable.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
