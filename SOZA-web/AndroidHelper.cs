@@ -45,5 +45,21 @@ namespace SOZA_web
 
             return newToken;
         }
+
+        public void AddGpsTrace(string token, double lat, double lon)
+        {
+            var androidClient = _dbContext.AndroidClients.FirstOrDefault(a => a.Token == token);
+            if (androidClient == null)
+                throw new Exception("Invalid token");
+
+            androidClient.GPSTraces.Add(new GPSTrace
+            {
+                Latitude = lat,
+                Longitude = lon,
+                Timestamp = DateTime.Now,
+                AndroidClient = androidClient
+            });
+            _dbContext.SaveChanges();
+        }
     }
 }

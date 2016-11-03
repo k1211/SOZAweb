@@ -193,8 +193,13 @@
     <Compile Include="Migrations\201610210846186_AndroidTokensTable.Designer.cs">
       <DependentUpon>201610210846186_AndroidTokensTable.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201611032053332_GPSTraces.cs" />
+    <Compile Include="Migrations\201611032053332_GPSTraces.Designer.cs">
+      <DependentUpon>201611032053332_GPSTraces.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\ApplicationUser.cs" />
+    <Compile Include="Models\Database\GPSTrace.cs" />
     <Compile Include="Models\ViewModels\AccountViewModels.cs" />
     <Compile Include="Models\Database\AndroidClient.cs" />
     <Compile Include="Models\Database\ApplicationDbContext.cs" />
@@ -282,6 +287,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201610210846186_AndroidTokensTable.resx">
       <DependentUpon>201610210846186_AndroidTokensTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201611032053332_GPSTraces.resx">
+      <DependentUpon>201611032053332_GPSTraces.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

@@ -6,13 +6,13 @@ using System.Web;
 
 namespace SOZA_web.Models
 {
-    public class AndroidClient
+    public class GPSTrace
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        public string Token { get; set; }
-        public string PhoneNumber { get; set; }
-        public virtual ApplicationUser Guardian { get; set; }
-        public virtual ICollection<GPSTrace> GPSTraces { get; set; }
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
+        public DateTime Timestamp { get; set; }
+        public virtual AndroidClient AndroidClient { get; set; }
     }
 }

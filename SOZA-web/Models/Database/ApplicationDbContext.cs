@@ -19,5 +19,6 @@ namespace SOZA_web.Models
         }
 
         public DbSet<AndroidClient> AndroidClients { get; set; }
+        public DbSet<GPSTrace> GPSTraces { get; set; }
     }
 }
