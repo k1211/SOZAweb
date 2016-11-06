@@ -1,0 +1,165 @@
+body  {
+	font-family: 'Roboto', sans-serif;
+	color: #747707;
+	font-weight: 400;
+}
+
+hr {
+    height: 1px;
+    background-color: #BCBBBB; /* Modern Browsers */
+}
+
+.text-muted	{
+	color: #BCBBBB;
+}
+
+.text-thin	{
+	font-weight: 100;
+}
+
+.title-super {
+	font-size: 60px;
+}
+
+.title-logo {
+	margin-top: 20px;
+}
+
+.frontpic {
+	max-width: 1000px;
+	max-height: 400px;
+	align-self: center;
+	padding-left: 100px;
+}
+
+.logo-header {
+	max-width: 100px;
+	max-height: 100px;
+}
+
+#panel {
+	width: 400px; 
+	margin: 0 auto; 
+	padding: 15px 0 0;
+	background: #fff;
+	border: 1px solid silver;
+	font: 20px calibri;
+	letter-spacing: -1px;
+	-webkit-box-shadow: 0 0 2px silver; 
+	-moz-box-shadow: 0 0 2px silver; 
+	box-shadow: 0 0 2px silver;
+}
+
+form {
+	margin: 0;
+}
+
+label {
+	display: block;
+	width: 260px;
+	padding: 10px 20px;
+	color: #696969;
+	font-size: 20px;
+	text-shadow: 0 0 1px silver;
+}
+
+#username, #password {
+	display: block;
+	width: 360px; 
+	margin: 0 auto;
+	padding: 10px 5px;
+	border: 1px solid silver;
+	outline: 5px solid #ebebeb;
+	font-size: 22px;
+}
+
+#username:focus, #password:focus {
+	outline: 5px solid #e5f2f8;
+}
+
+
+#lower {
+	background: #ecf2f5;
+	width: 398px;
+	padding: 5px 20px;
+	margin-top: 20px;
+}
+
+.check {
+	display: inline;
+	float: none;
+	font-size: 16px;
+	padding: 5px;
+}
+
+input[type="submit"] {
+	width: 100px;
+	padding: 5px 13px;
+	border: 1px solid #005f85;
+	color: white;
+	text-shadow: 0 0 1px black;
+	background: #98c9dc;
+	position: relative;
+
+}
+
+#panel, input[type="submit"] {
+    -webkit-border-radius: 5px; 
+    -moz-border-radius: 5px; 
+    border-radius: 5px; 
+}
+
+#haslo {
+	padding-left: 20px;
+}
+
+p {
+	font-size: 18px;
+}
+
+#formularz {
+        margin:0 auto; /* jeżeli nasz formularz ma ustawioną szerokość wyśrodkowujemy go */
+        background-color:#fff; /* dodajemy kolor tła naszemu formularzowi */
+        border:2px solid #ccc; /* dodajemy obramowanie o szerokości 2px */
+        border-radius:10px; /* zaokrąglamy tło naszego formularza */
+		padding:20px; /* dodajemy margines wewnątrz naszego formularza */
+        margin-top:20px; /* dodajemy margines górny naszego formularza */
+}
+
+#formularz label {
+    display:block;/* ustawiamy by label rozpoczynał się od nowej linii*/
+    margin-bottom:5px;/* dodajemy margines dolny */
+    font-weight:bold; /* pogrubiamy czcionkę */
+    text-transform: uppercase; /* zamieniamy wszystkie litery na duże */
+    font-size:12px; /* ustawiamy wielkość czcionki */
+    color:#555555; /* ustawiamy kolor czcionki */
+}
+
+#formularz textarea,
+#formularz input {
+	padding:5px; /* dodajemy margines wewnątrz naszego pola */
+	border-radius:3px; /* dodajemy zaokraglone rogi */
+	border:1px solid #ccc; /* dodajemy obramowanie */
+	margin-bottom:25px; /* dodajemy margines dolny */
+	width:245px; /* ustalamy szerokość */
+}
+
+#formularz input#okej {
+	
+	cursor:pointer; /* zmieniamy kursor */
+	margin-bottom:0px;/* resetujemy margines dolny */
+	display:block;
+}
+
+#formularz p.copy {
+	color:#555555; /* ustawiamy kolor czcionki */
+	margin-bottom:0px; /* resetujemy margines dolny */
+	font-size:12px; /* ustawiamy rozmiar czcionki */
+	text-align: center; /* wyśrodkowywujemy tekst */
+}
+
+#formularz p.copy a {
+	color:#555555;/* ustawiamy kolor czcionki */ 
+	text-decoration: none; /* usuwamy podkreślenie linku */
+	font-weight:bold; /* pogrubiamy czcionkę */
+}  
