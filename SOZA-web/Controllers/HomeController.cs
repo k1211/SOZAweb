@@ -15,7 +15,7 @@ namespace SOZA_web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "o nanananansssss";
 
             return View();
         }
@@ -26,5 +26,13 @@ namespace SOZA_web.Controllers
 
             return View();
         }
+
+        public ActionResult AboutProject()
+        {
+            ViewBag.Message = "o projekcieee";
+
+            return View();
+        }
+
     }
 }
