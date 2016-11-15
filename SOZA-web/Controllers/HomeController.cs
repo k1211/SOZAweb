@@ -15,7 +15,7 @@ namespace SOZA_web.Controllers
 
         public ActionResult About()
         {
-            ViewBag.Message = "o nanananansssss";
+            ViewBag.Message = "O twórcach projektu SOZA";
 
             return View();
         }
@@ -29,7 +29,7 @@ namespace SOZA_web.Controllers
 
         public ActionResult AboutProject()
         {
-            ViewBag.Message = "o projekcieee";
+            ViewBag.Message = "O projekcie SOZA";
 
             return View();
         }
