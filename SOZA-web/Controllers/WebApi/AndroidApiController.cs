@@ -14,9 +14,9 @@ namespace SOZA_web.Controllers.WebApi
     {
         private static readonly string ANDROID_CLIENT_PASS = "12cb74ahq";
 
-        [Route("token/generate")]
-        [HttpPost]
-        public string GenerateToken([FromBody]string securityPass)
+        [Route("token/generate/{securityPass}")]
+        [HttpGet]
+        public string GenerateToken(string securityPass)
         {
             if (securityPass != ANDROID_CLIENT_PASS)
                 throw new HttpResponseException(HttpStatusCode.Forbidden);
