@@ -20,7 +20,7 @@ namespace SOZA_web.Controllers
             return View();
         }
 
-        public ActionResult SafeAreaPanel()
+        public ActionResult SafeAreasPanel()
         {
             return View();
         }
