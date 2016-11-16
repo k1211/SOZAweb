@@ -27,8 +27,8 @@
                     @*tutaj dodać if logged in*@
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Historia lokalizacji", "LocationHistory", "Home")</li>
-                        <li>@Html.ActionLink("Panel Stref Bezpiecznych", "SafeAreasPanel", "Home")</li>
+                        <li>@Html.ActionLink("Historia lokalizacji", "LocationHistory", "Map")</li>
+                        <li>@Html.ActionLink("Panel Stref Bezpiecznych", "SafeAreasPanel", "Map")</li>
                     }
 
                 </ul>
