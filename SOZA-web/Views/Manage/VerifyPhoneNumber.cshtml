@@ -1,9 +1,7 @@
 ﻿@model SOZA_web.Models.VerifyPhoneNumberViewModel
 @{
-    ViewBag.Title = "Verify Phone Number";
+    ViewBag.Title = "Weryfikacja numeru telefonu";
 }
-
-<h2>@ViewBag.Title.</h2>
 
 @using (Html.BeginForm("VerifyPhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {

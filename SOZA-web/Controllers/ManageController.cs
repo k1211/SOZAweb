@@ -55,12 +55,12 @@ namespace SOZA_web.Controllers
         public async Task<ActionResult> Index(ManageMessageId? message)
         {
             ViewBag.StatusMessage =
-                message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
-                : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
-                : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
-                : message == ManageMessageId.Error ? "An error has occurred."
-                : message == ManageMessageId.AddPhoneSuccess ? "Your phone number was added."
-                : message == ManageMessageId.RemovePhoneSuccess ? "Your phone number was removed."
+                message == ManageMessageId.ChangePasswordSuccess ? "Twoje hasło zostało zmienione."
+                : message == ManageMessageId.SetPasswordSuccess ? "Twoje hasło zostało ustawione."
+                : message == ManageMessageId.SetTwoFactorSuccess ? "Ustawiłeś dwustopniową uwierzytelnianie"
+                : message == ManageMessageId.Error ? "Wystapił błąd."
+                : message == ManageMessageId.AddPhoneSuccess ? "Twój numer telefonu został dodany."
+                : message == ManageMessageId.RemovePhoneSuccess ? "Twój numer telefonu został dodany."
                 : "";
 
             var userId = User.Identity.GetUserId();
@@ -123,7 +123,7 @@ namespace SOZA_web.Controllers
                 var message = new IdentityMessage
                 {
                     Destination = model.Number,
-                    Body = "Your security code is: " + code
+                    Body = "Twój kod bezpieczeństwa: " + code
                 };
                 await UserManager.SmsService.SendAsync(message);
             }
@@ -190,7 +190,7 @@ namespace SOZA_web.Controllers
                 return RedirectToAction("Index", new { Message = ManageMessageId.AddPhoneSuccess });
             }
             // If we got this far, something failed, redisplay form
-            ModelState.AddModelError("", "Failed to verify phone");
+            ModelState.AddModelError("", "Weryfikacja numeru telefonu zakończona niepowodzeniem");
             return View(model);
         }
 

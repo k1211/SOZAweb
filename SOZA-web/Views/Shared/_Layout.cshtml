@@ -24,7 +24,7 @@
                     <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
                     <li>@Html.ActionLink("O nas", "About", "Home")</li>
                     <li>@Html.ActionLink("O projekcie", "AboutProject", "Home")</li>
-                    @*tutaj dodać if logged in*@
+
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink("Historia lokalizacji", "LocationHistory", "Map")</li>
