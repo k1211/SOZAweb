@@ -1,0 +1,42 @@
+﻿@model SOZA_web.Models.AndroidClient
+
+@{
+    ViewBag.Title = "Android Client Details";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div>
+    <h4>AndroidClient</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Token)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Token)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.PhoneNumber)
+        </dd>
+        
+        <dt>
+            Guardian UserName
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Guardian.UserName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "AndroidClientsEdit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "AndroidClientsIndex")
+</p>

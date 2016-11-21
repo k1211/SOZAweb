@@ -1,3 +1,7 @@
+Passy do konta app admina:
+admin@admin.pl
+123456
+
 Passy do bazy danych:
 soza_admin
 Dupa123!@#

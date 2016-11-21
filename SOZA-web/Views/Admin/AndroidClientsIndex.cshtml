@@ -1,0 +1,45 @@
+﻿@model IEnumerable<SOZA_web.Models.AndroidClient>
+
+@{
+    ViewBag.Title = "Android Clients";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<p>
+    @Html.ActionLink("Create New", "AndroidClientsCreate")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Token)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PhoneNumber)
+        </th>
+        <th>
+            Guardian UserName
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Token)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Guardian.UserName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "AndroidClientsEdit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "AndroidClientsDetails", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "AndroidClientsDelete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

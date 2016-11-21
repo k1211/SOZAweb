@@ -12,15 +12,10 @@ namespace SOZA_web.Controllers.WebApi
     [RoutePrefix("api/android")]
     public class AndroidApiController : ApiController
     {
-        private static readonly string ANDROID_CLIENT_PASS = "12cb74ahq";
-
-        [Route("token/generate/{securityPass}")]
+        [Route("token/generate")]
         [HttpGet]
         public string GenerateToken(string securityPass)
         {
-            if (securityPass != ANDROID_CLIENT_PASS)
-                throw new HttpResponseException(HttpStatusCode.Forbidden);
-
             var androidHelper = new AndroidHelper(ApplicationDbContext.Create());
             var token = androidHelper.GenerateToken();
             return token;
@@ -42,8 +37,7 @@ namespace SOZA_web.Controllers.WebApi
             }
             catch (Exception e)
             {
-                var response = new HttpResponseMessage(HttpStatusCode.Forbidden);
-                response.ReasonPhrase = e.Message;
+                var response = new HttpResponseMessage(HttpStatusCode.Forbidden) {ReasonPhrase = e.Message};
                 throw new HttpResponseException(response);
             }
         }

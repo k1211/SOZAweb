@@ -7,7 +7,14 @@
 
     <ul class="nav navbar-nav navbar-right">
         <li>
-            @Html.ActionLink("Witaj " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new { title = "Konto użytkownika" })
+            @if (User.IsInRole("AppAdmin"))
+            {
+                <li>@Html.ActionLink("ADMIN PANEL", "Index", "Admin")</li>
+            }
+            else
+            {
+                @Html.ActionLink("Witaj " + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = "Konto użytkownika"})
+            }
         </li>
         <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj się</a></li>
     </ul>

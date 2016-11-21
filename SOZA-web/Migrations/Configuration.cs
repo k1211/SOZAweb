@@ -17,24 +17,29 @@ namespace SOZA_web.Migrations
 
         protected override void Seed(SOZA_web.Models.ApplicationDbContext context)
         {
-            //if (!context.Roles.Any(r => r.Name == "AppAdmin"))
-            //{
-            //    var store = new RoleStore<IdentityRole>(context);
-            //    var manager = new RoleManager<IdentityRole>(store);
-            //    var role = new IdentityRole { Name = "AppAdmin" };
+            var adminRole = "AppAdmin";
+            var defaultAdminName = "admin@admin.pl";
+            var defaultAdminPass = "123456";
 
-            //    manager.Create(role);
-            //}
+            if (!context.Roles.Any(r => r.Name == adminRole))
+            {
+                var roleStore = new RoleStore<IdentityRole>(context);
+                var roleManager = new RoleManager<IdentityRole>(roleStore);
+                var role = new IdentityRole { Name = adminRole };
 
-            //if (!context.Users.Any(u => u.UserName == "founder"))
-            //{
-            //    var store = new UserStore<ApplicationUser>(context);
-            //    var manager = new UserManager<ApplicationUser>(store);
-            //    var user = new ApplicationUser { UserName = "founder" };
+                roleManager.Create(role);
+            }
 
-            //    manager.Create(user, "ChangeItAsap!");
-            //    manager.AddToRole(user.Id, "AppAdmin");
-            //}
+            var userStore = new UserStore<ApplicationUser>(context);
+            var userManager = new UserManager<ApplicationUser>(userStore);
+
+            var adminUser = context.Users.FirstOrDefault(u => u.UserName == defaultAdminName);
+            if (adminUser != null)
+                userManager.Delete(adminUser);
+
+            var newAdminUser = new ApplicationUser { UserName = defaultAdminName };
+            userManager.Create(newAdminUser, defaultAdminPass);
+            userManager.AddToRole(newAdminUser.Id, adminRole);
         }
     }
 }
