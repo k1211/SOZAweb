@@ -1,7 +1,126 @@
 ﻿
 @{
     ViewBag.Title = "Lokalizacja Chorego";
+
+
 }
 
-<h2>Lokalizacja Chorego</h2>
+@model SOZA_web.Models.Map
 
+<h2>Lokalizacja Chorego</h2>
+﻿
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_y0sL-G1D8VsCgz9e7sxKjgM_oyqwoi0" type="text/javascript"></script>
+
+@foreach (SOZA_web.Models.Location Loc in Model.Loc)
+{
+    <div class="Loc" data-latitude="@(Loc.Latitude)"
+         data-longitude="@(Loc.Longitude)">
+    </div>
+}
+
+<style>
+    .infoDiv {
+        height: 5%;
+        width: 8%;
+        -webkit-user-select: none;
+        background-color: white;
+    }
+</style>
+<br />
+<div id="map_canvas" style="height: 550px; width: 80%;"></div>
+
+             
+  @section scripts {
+    <section class="scripts">
+    <script type="text/javascript">
+
+    $(document).ready(function () { Initialize(); });
+
+    function Initialize() {
+        var Locs = $(".Loc");
+        var Coord = new Array();
+
+        $.each(Locs, function (key, value) {
+            var Lat = Number(String($(this).attr("data-latitude")).replace(",", "."));
+            var Long = Number(String($(this).attr("data-longitude")).replace(",", "."));
+            Coord.push(new google.maps.LatLng(Lat, Long));
+        });
+
+        if (Coord.length > 0)
+        {
+
+            var mapOptions = {
+                zoom: 16,
+                center: Coord[0],
+                mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+            };
+            var mapCanvas = document.getElementById('map_canvas');
+            if (mapCanvas != null) {
+                map = new google.maps.Map(mapCanvas, mapOptions);
+
+                var SafeArea = new google.maps.Circle({
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 0.8,
+                    strokeWeight: 2,
+                    fillColor: '#FF0000',
+                    fillOpacity: 0.35,
+                    map: map,
+                    center: Coord[0],
+                    radius: 50
+                });
+
+                var EscapePath = new google.maps.Polyline({
+                    path: Coord,
+                    geodesic: true,
+                    strokeColor: '#FF0000',
+                    strokeOpacity: 1.0,
+                    strokeWeight: 2
+                });
+                EscapePath.setMap(map);
+
+                if (Coord.length > 0) {
+                    marker = new google.maps.Marker({
+                        map: map,
+                        draggable: false,
+                        position: Coord[Coord.length - 1]
+                    })
+                    marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+                }
+        }
+            /*
+            map.addListener('click', addLatLng);
+            
+            function addLatLng(event) {
+                var path = EscapePath.getPath();
+
+                // Because path is an MVCArray, we can simply append a new coordinate
+                // and it will automatically appear.
+                path.push(event.latLng);
+            }*/
+
+            
+
+
+
+         //   marker.setIcon('http://maps.google.com/mapfiles/ms/icons/blue-dot.png');
+
+         /*   var infowindow = new google.maps.InfoWindow
+             ({
+                 content: "<div class='infoDiv'>" + "test2" + "</div>"
+             });
+
+            google.maps.event.addListener(markers[key], 'click', function () {
+                infowindow.open(map, markers[key]);
+            });*/
+
+        }
+    }
+      
+   /*  
+      
+      */
+        </script>
+    </section>
+
+
+}
