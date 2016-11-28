@@ -12,12 +12,6 @@ namespace SOZA_web.Controllers
     [Authorize]
     public class MapController : Controller
     {
-        // GET: Map
-        public ActionResult Index()
-        {
-            return View();
-        }
-
         public ActionResult LocationHistory()
         {
 
