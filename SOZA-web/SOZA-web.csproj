@@ -237,7 +237,6 @@
     <Content Include="Content\100x100" />
     <Content Include="Content\1140x350" />
     <Content Include="Content\555x300" />
-    <Content Include="ClassDiagram1.cd" />
     <None Include="Properties\PublishProfiles\soza - Web Deploy.pubxml">
       <SubType>Designer</SubType>
     </None>
