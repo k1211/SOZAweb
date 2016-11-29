@@ -15,35 +15,69 @@ namespace SOZA_web.Controllers
         public ActionResult LocationHistory()
         {
 
-            //Set loc in Map model through GPS Trace DB
+            //Set loc in Map model through GPS Trace DB list2.Add(new Test() { A = 3, B = "Sarah" });
             var model = new Map
             {
                 Loc = new List<Location>()
             };
 
-            Location location = new Location
+            model.Loc.Add(new Location()
             {
-                Caption = "test",
-                Latitude = 54.382842,
-                Longitude = 18.600420
-            };
-            model.Loc.Add(location);
-            Location location2 = new Location
+                Latitude = 54.3715175,
+                Longitude = 18.6126851,
+                Timestamp = DateTime.Now.AddMinutes(54)
+            });
+            model.Loc.Add(new Location()
             {
-                Caption = "test2",
-                Latitude = 54.382797,
-                Longitude = 18.598535
-            };
-            model.Loc.Add(location2);
-            Location location3 = new Location
+                Latitude = 54.3726143,
+                Longitude = 18.613522,
+                Timestamp = DateTime.Now.AddMinutes(48)
+            });
+            model.Loc.Add(new Location()
             {
                 Caption = "test3",
-                Latitude = 54.383428,
-                Longitude = 18.597044
-            };
-            model.Loc.Add(location3);
+                Latitude = 54.3721956,
+                Longitude = 18.6155014,
+                Timestamp = DateTime.Now.AddMinutes(41)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3730332,
+                Longitude = 18.6160891,
+                Timestamp = DateTime.Now.AddMinutes(37)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3729893,
+                Longitude = 18.6162471,
+                Timestamp = DateTime.Now.AddMinutes(32)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.37258,
+                Longitude = 18.6161827,
+                Timestamp = DateTime.Now.AddMinutes(26)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3722331,
+                Longitude = 18.6166762,
+                Timestamp = DateTime.Now.AddMinutes(15)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3717394,
+                Longitude = 18.6166601,
+                Timestamp = DateTime.Now.AddMinutes(7)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3712851,
+                Longitude = 18.6166806,
+                Timestamp = DateTime.Now
+            });
+           // ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
 
-          //  ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
             var db = ApplicationDbContext.Create();
             var GPSTraces = db.GPSTraces;
 
