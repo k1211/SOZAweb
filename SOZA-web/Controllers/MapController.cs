@@ -96,6 +96,9 @@ namespace SOZA_web.Controllers
 
         public ActionResult SafeAreasPanel()
         {
+            ViewBag.InputHint = "Wpisz i wyszukaj punkt celem wyznaczenia strefy bezpiecznej";
+            ViewBag.InputHint2 = "... albo przeciągnij i upuść znacznik bezpośrednio na mapie.";
+            ViewBag.SliderHint = "Przesuwaj pasek by zmieniać rozmiar strefy bezpiecznej.";
             return View();
         }
     }

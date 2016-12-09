@@ -8,6 +8,7 @@ namespace SOZA_web.Models
     public class Map
     {
         public List<Location> Loc { get; set; }//IList?
+        public double[] SafeArea = new double[2] {54.382842 , 18.600420};
 
     }
     public class Location

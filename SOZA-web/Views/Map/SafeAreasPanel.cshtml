@@ -5,3 +5,256 @@
 
 <h2>Edycja Stref Bezpiecznych</h2>
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_y0sL-G1D8VsCgz9e7sxKjgM_oyqwoi0&libraries=places" type="text/javascript"></script>
+
+<p>@ViewBag.InputHint</p>
+<input id="pac-input" class="controls" type="text" placeholder="Search Box">
+<p>@ViewBag.InputHint2</p>
+<p>@ViewBag.SliderHint</p>
+ <div class="price-slider">  <div class="col-sm-12"> <div id="slider"></div> </div>  </div>
+    
+<div id="map_canvas" style="height: 550px"></div>
+
+<style>
+
+ .controls {
+        margin-top: 10px;
+        border: 1px solid transparent;
+        border-radius: 2px 0 0 2px;
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        height: 32px;
+        outline: none;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+      }
+
+ #pac-input {
+        background-color: #fff;
+        font-family: Roboto;
+        font-size: 15px;
+        font-weight: 300;
+        margin-left: 12px;
+        padding: 0 11px 0 13px;
+        text-overflow: ellipsis;
+        width: 300px;
+      }
+
+       #pac-input:focus {
+        border-color: #4d90fe;
+      }
+
+      .pac-container {
+        font-family: Roboto;
+      }
+
+      #type-selector {
+        color: #fff;
+        background-color: #4d90fe;
+        padding: 5px 11px 0px 11px;
+      }
+
+      #type-selector label {
+        font-family: Roboto;
+        font-size: 13px;
+        font-weight: 300;
+      }
+      #target {
+        width: 345px;
+ }
+       
+.ui-widget-content {
+	border: 1px solid #bdc3c7;
+	background: #e1e1e1;
+	color: #222222;
+	margin-top: 4px;
+}
+
+.ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	width: 5.2em;
+	height: 2.2em;
+	cursor: default;
+	margin: 0 -40px auto !important;
+	text-align: center;	
+	line-height: 30px;
+	color: #FFFFFF;
+	font-size: 15px;
+}
+
+.ui-slider .ui-slider-handle .glyphicon {
+	color: #FFFFFF;
+	margin: 0 3px; 
+	font-size: 11px;
+	opacity: 0.5;
+}
+
+.ui-corner-all {
+	border-radius: 20px;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+	top: -.9em;
+}
+
+.ui-state-default,
+.ui-widget-content .ui-state-default {
+	border: 1px solid #f9f9f9;
+	background: #3498db;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+	margin-left: -0.5em;
+}
+
+.ui-slider .ui-slider-handle {
+	cursor: pointer;
+}
+
+.ui-slider a,
+.ui-slider a:focus {
+	cursor: pointer;
+	outline: none;
+}
+
+.price-slider {
+	margin-bottom: 70px;
+}
+
+.price-slider span {
+	font-weight: 200;
+	display: inline-block;
+	color: #7f8c8d;
+	font-size: 13px;
+}
+
+.ui-slider-range-min {
+	background: #2980b9;
+}
+
+</style>
+
+@section scripts {
+    <section class="scripts">
+        <script type="text/javascript">
+
+            var SafeLatLng = new google.maps.LatLng(54.3715175, 18.6126851);
+            var map;
+            var Marker;
+            var radius;
+            var SafeArea = new google.maps.Circle({
+                strokeColor: '#FF0000',
+                strokeOpacity: 0.8,
+                strokeWeight: 2,
+                fillColor: '#FF0000',
+                fillOpacity: 0.35
+            });
+
+            $(document).ready(function () { Initialize(); });
+
+            function DrawCircle() {
+                SafeArea.setMap(map);
+                SafeArea.setCenter(SafeLatLng);
+                SafeArea.setRadius(radius);
+            }
+
+            function Initialize() {
+                var initialValue = 10;//SafeArea get
+                var UpdateSlider = function (event, ui) {
+                    radius = ui.value || initialValue; //SafeArea set
+                    DrawCircle();
+                    $('.ui-slider-handle').html('<label><span class="glyphicon glyphicon-chevron-left"></span>' + radius * 2 + ' <span class="glyphicon glyphicon-chevron-right"></span></label>');
+                };
+        $("#slider").slider({
+            animate: true,
+            value: initialValue,
+            min: 10,
+            max: 200,
+            step: 1,
+            slide: UpdateSlider,
+            create: UpdateSlider
+        });
+
+        var mapOptions = {
+            zoom: 17,
+            center: SafeLatLng,
+            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+        };
+        var mapCanvas = document.getElementById('map_canvas');
+
+        if (mapCanvas != null) {
+            map = new google.maps.Map(mapCanvas, mapOptions);
+            DrawCircle();
+
+            var input = document.getElementById('pac-input');
+            var searchBox = new google.maps.places.SearchBox(input);
+            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+
+            // Bias the SearchBox results towards current map's viewport.
+            map.addListener('bounds_changed', function () {
+                searchBox.setBounds(map.getBounds());
+            });
+
+            var markers = [];
+            // Listen for the event fired when the user selects a prediction and retrieve
+            // more details for that place.
+            searchBox.addListener('places_changed', function () {
+                var places = searchBox.getPlaces();
+
+                if (places.length == 0) {
+                    return;
+                }
+
+                // Clear out the old markers.
+                markers.forEach(function (marker) {
+                    marker.setMap(null);
+                });
+                markers = [];
+
+                // For each place, get the icon, name and location.
+                var bounds = new google.maps.LatLngBounds();
+                places.forEach(function (place) {
+                    if (!place.geometry) {
+                        console.log("Returned place contains no geometry");
+                        return;
+                    }
+                    var icon = {
+                        url: place.icon,
+                        size: new google.maps.Size(71, 71),
+                        origin: new google.maps.Point(0, 0),
+                        anchor: new google.maps.Point(17, 34),
+                        scaledSize: new google.maps.Size(25, 25)
+                    };
+
+                    // Create a marker for each place.
+                    markers.push(new google.maps.Marker({
+                        map: map,
+                        icon: icon,
+                        title: place.name,
+                        draggable: true,
+                        position: place.geometry.location
+                    }));
+                    markers[markers.length - 1].addListener('dragend', function (evt) {
+                        SafeLatLng = evt.latLng;
+                        DrawCircle();
+                    });
+
+                    SafeLatLng = place.geometry.location;
+                    DrawCircle();
+
+                    if (place.geometry.viewport) {
+                        // Only geocodes have viewport.
+                        bounds.union(place.geometry.viewport);
+                    } else {
+                        bounds.extend(place.geometry.location);
+                    }
+                });
+                map.fitBounds(bounds);
+            });
+        }
+
+    }
+
+        </script>
+    </section>
+    }
