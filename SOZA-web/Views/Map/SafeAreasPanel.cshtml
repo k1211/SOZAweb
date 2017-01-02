@@ -3,6 +3,8 @@
     ViewBag.Title = "Edycja Stref Bezpiecznych";
 }
 
+@model SOZA_web.Models.SafeArea
+
 <h2>Edycja Stref Bezpiecznych</h2>
 
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD_y0sL-G1D8VsCgz9e7sxKjgM_oyqwoi0&libraries=places" type="text/javascript"></script>
@@ -12,7 +14,9 @@
 <p>@ViewBag.InputHint2</p>
 <p>@ViewBag.SliderHint</p>
  <div class="price-slider">  <div class="col-sm-12"> <div id="slider"></div> </div>  </div>
-    
+<div class="SafeLatLng" data-latitude="@(Model.SafeLatLng.lat)" data-longitude="@(Model.SafeLatLng.lng)"></div>
+<div class="Radius" value="@(Model.Radius)"></div>
+
 <div id="map_canvas" style="height: 550px"></div>
 
 <style>
@@ -61,7 +65,7 @@
       #target {
         width: 345px;
  }
-       
+
 .ui-widget-content {
 	border: 1px solid #bdc3c7;
 	background: #e1e1e1;
@@ -76,7 +80,7 @@
 	height: 2.2em;
 	cursor: default;
 	margin: 0 -40px auto !important;
-	text-align: center;	
+	text-align: center;
 	line-height: 30px;
 	color: #FFFFFF;
 	font-size: 15px;
@@ -84,7 +88,7 @@
 
 .ui-slider .ui-slider-handle .glyphicon {
 	color: #FFFFFF;
-	margin: 0 3px; 
+	margin: 0 3px;
 	font-size: 11px;
 	opacity: 0.5;
 }
@@ -137,8 +141,9 @@
 @section scripts {
     <section class="scripts">
         <script type="text/javascript">
-
-            var SafeLatLng = new google.maps.LatLng(54.3715175, 18.6126851);
+            var Lat = Number(String($(".SafeLatLng").attr("data-latitude")).replace(",", "."));
+            var Long = Number(String($(".SafeLatLng").attr("data-longitude")).replace(",", "."));
+            var SafeAreaLatLng = new google.maps.LatLng(Lat, Long);
             var map;
             var Marker;
             var radius;
@@ -150,110 +155,121 @@
                 fillOpacity: 0.35
             });
 
+
             $(document).ready(function () { Initialize(); });
 
             function DrawCircle() {
                 SafeArea.setMap(map);
-                SafeArea.setCenter(SafeLatLng);
+                SafeArea.setCenter(SafeAreaLatLng);
                 SafeArea.setRadius(radius);
+
+                postSafeArea();
+            }
+            function postSafeArea() {
+
+                $.post("/Map/SafeAreasPanel/", { SafeAreaLoc: SafeAreaLatLng.toUrlValue() , SafeAreaRadius: radius} ,function(data){
+                    //do whatever with the response
+
+                });
+
             }
 
             function Initialize() {
-                var initialValue = 10;//SafeArea get
+                var initialValue = Number($(".Radius").attr("value"));//SafeArea get
                 var UpdateSlider = function (event, ui) {
                     radius = ui.value || initialValue; //SafeArea set
                     DrawCircle();
                     $('.ui-slider-handle').html('<label><span class="glyphicon glyphicon-chevron-left"></span>' + radius * 2 + ' <span class="glyphicon glyphicon-chevron-right"></span></label>');
                 };
-        $("#slider").slider({
-            animate: true,
-            value: initialValue,
-            min: 10,
-            max: 200,
-            step: 1,
-            slide: UpdateSlider,
-            create: UpdateSlider
-        });
-
-        var mapOptions = {
-            zoom: 17,
-            center: SafeLatLng,
-            mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
-        };
-        var mapCanvas = document.getElementById('map_canvas');
-
-        if (mapCanvas != null) {
-            map = new google.maps.Map(mapCanvas, mapOptions);
-            DrawCircle();
-
-            var input = document.getElementById('pac-input');
-            var searchBox = new google.maps.places.SearchBox(input);
-            map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
-
-            // Bias the SearchBox results towards current map's viewport.
-            map.addListener('bounds_changed', function () {
-                searchBox.setBounds(map.getBounds());
-            });
-
-            var markers = [];
-            // Listen for the event fired when the user selects a prediction and retrieve
-            // more details for that place.
-            searchBox.addListener('places_changed', function () {
-                var places = searchBox.getPlaces();
-
-                if (places.length == 0) {
-                    return;
-                }
-
-                // Clear out the old markers.
-                markers.forEach(function (marker) {
-                    marker.setMap(null);
+                $("#slider").slider({
+                    animate: true,
+                    value: initialValue,
+                    min: 10,
+                    max: 200,
+                    step: 1,
+                    slide: UpdateSlider,
+                    create: UpdateSlider
                 });
-                markers = [];
 
-                // For each place, get the icon, name and location.
-                var bounds = new google.maps.LatLngBounds();
-                places.forEach(function (place) {
-                    if (!place.geometry) {
-                        console.log("Returned place contains no geometry");
-                        return;
-                    }
-                    var icon = {
-                        url: place.icon,
-                        size: new google.maps.Size(71, 71),
-                        origin: new google.maps.Point(0, 0),
-                        anchor: new google.maps.Point(17, 34),
-                        scaledSize: new google.maps.Size(25, 25)
-                    };
+                var mapOptions = {
+                    zoom: 17,
+                    center: SafeAreaLatLng,
+                    mapTypeId: google.maps.MapTypeId.G_NORMAL_MAP
+                };
+                var mapCanvas = document.getElementById('map_canvas');
 
-                    // Create a marker for each place.
-                    markers.push(new google.maps.Marker({
-                        map: map,
-                        icon: icon,
-                        title: place.name,
-                        draggable: true,
-                        position: place.geometry.location
-                    }));
-                    markers[markers.length - 1].addListener('dragend', function (evt) {
-                        SafeLatLng = evt.latLng;
-                        DrawCircle();
-                    });
-
-                    SafeLatLng = place.geometry.location;
+                if (mapCanvas != null) {
+                    map = new google.maps.Map(mapCanvas, mapOptions);
                     DrawCircle();
 
-                    if (place.geometry.viewport) {
-                        // Only geocodes have viewport.
-                        bounds.union(place.geometry.viewport);
-                    } else {
-                        bounds.extend(place.geometry.location);
-                    }
-                });
-                map.fitBounds(bounds);
-            });
-        }
+                    var input = document.getElementById('pac-input');
+                    var searchBox = new google.maps.places.SearchBox(input);
+                    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
 
-    }
+                    // Bias the SearchBox results towards current map's viewport.
+                    map.addListener('bounds_changed', function () {
+                        searchBox.setBounds(map.getBounds());
+                    });
+
+                    var markers = [];
+                    // Listen for the event fired when the user selects a prediction and retrieve
+                    // more details for that place.
+                    searchBox.addListener('places_changed', function () {
+                        var places = searchBox.getPlaces();
+
+                        if (places.length == 0) {
+                            return;
+                        }
+
+                        // Clear out the old markers.
+                        markers.forEach(function (marker) {
+                            marker.setMap(null);
+                        });
+                        markers = [];
+
+                        // For each place, get the icon, name and location.
+                        var bounds = new google.maps.LatLngBounds();
+                        places.forEach(function (place) {
+                            if (!place.geometry) {
+                                console.log("Returned place contains no geometry");
+                                return;
+                            }
+                            var icon = {
+                                url: place.icon,
+                                size: new google.maps.Size(71, 71),
+                                origin: new google.maps.Point(0, 0),
+                                anchor: new google.maps.Point(17, 34),
+                                scaledSize: new google.maps.Size(25, 25)
+                            };
+
+                            // Create a marker for each place.
+                            markers.push(new google.maps.Marker({
+                                map: map,
+                                icon: icon,
+                                title: place.name,
+                                draggable: true,
+                                position: place.geometry.location
+                            }));
+                            markers[markers.length - 1].addListener('dragend', function (evt) {
+                                SafeAreaLatLng = evt.latLng;
+                                DrawCircle();
+                            });
+
+                            SafeAreaLatLng = place.geometry.location;
+                            DrawCircle();
+
+                            if (place.geometry.viewport) {
+                                // Only geocodes have viewport.
+                                bounds.union(place.geometry.viewport);
+                            } else {
+                                bounds.extend(place.geometry.location);
+                            }
+                        });
+                        map.fitBounds(bounds);
+                    });
+                }
+
+            }
 
         </script>
     </section>

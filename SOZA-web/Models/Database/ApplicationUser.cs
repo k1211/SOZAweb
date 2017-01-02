@@ -19,5 +19,14 @@ namespace SOZA_web.Models
             // Add custom user claims here
             return userIdentity;
         }
+        public class Location
+        {
+            public double lat { get; set; }
+            public double lng { get; set; }
+        }
+
+        public Location SafeLatLng { get; set; }
+        public int SafeAreaRadius { get; set; }
+
     }
 }

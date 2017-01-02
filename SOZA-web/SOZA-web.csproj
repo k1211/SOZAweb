@@ -219,6 +219,14 @@
     <Compile Include="Migrations\201611032053332_GPSTraces.Designer.cs">
       <DependentUpon>201611032053332_GPSTraces.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701021128076_SafeLatLng.cs" />
+    <Compile Include="Migrations\201701021128076_SafeLatLng.Designer.cs">
+      <DependentUpon>201701021128076_SafeLatLng.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201701021528407_SafeAreaRadius.cs" />
+    <Compile Include="Migrations\201701021528407_SafeAreaRadius.Designer.cs">
+      <DependentUpon>201701021528407_SafeAreaRadius.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\ApplicationUser.cs" />
     <Compile Include="Models\Database\GPSTrace.cs" />
@@ -377,6 +385,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201611032053332_GPSTraces.resx">
       <DependentUpon>201611032053332_GPSTraces.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701021128076_SafeLatLng.resx">
+      <DependentUpon>201701021128076_SafeLatLng.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701021528407_SafeAreaRadius.resx">
+      <DependentUpon>201701021528407_SafeAreaRadius.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
