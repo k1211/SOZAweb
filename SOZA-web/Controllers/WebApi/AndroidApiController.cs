@@ -14,11 +14,28 @@ namespace SOZA_web.Controllers.WebApi
     {
         [Route("token/generate")]
         [HttpGet]
-        public string GenerateToken(string securityPass)
+        public string GenerateToken()
         {
             var androidHelper = new AndroidHelper(ApplicationDbContext.Create());
             var token = androidHelper.GenerateToken();
             return token;
+        }
+
+        [Route("phonenumber/get/{token}")]
+        [HttpGet]
+        public string GetGuardianPhoneNumber(string token)
+        {
+            try
+            {
+                var androidHelper = new AndroidHelper(ApplicationDbContext.Create());
+                var phoneNumber = androidHelper.GetGuardianPhoneNumber(token);
+                return JsonConvert.SerializeObject(phoneNumber);
+            }
+            catch (Exception e)
+            {
+                var response = new HttpResponseMessage(HttpStatusCode.Forbidden) { ReasonPhrase = e.Message };
+                throw new HttpResponseException(response);
+            }
         }
 
         [Route("gpstrace/add")]

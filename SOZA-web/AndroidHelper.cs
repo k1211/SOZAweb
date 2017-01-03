@@ -31,6 +31,19 @@ namespace SOZA_web
             }
         }
 
+        public string GetGuardianPhoneNumber(string token)
+        {
+            var androidClient = _dbContext.AndroidClients.FirstOrDefault(a => a.Token == token);
+            if (androidClient == null)
+                throw new Exception("Invalid token");
+            if (androidClient.Guardian == null)
+                throw new Exception("Guardian is null");
+            if (string.IsNullOrWhiteSpace(androidClient.Guardian.PhoneNumber))
+                throw new Exception("Guardian has no phone number");
+
+            return androidClient.Guardian.PhoneNumber;
+        }
+
         public string GenerateToken()
         {
             string newToken = "";
