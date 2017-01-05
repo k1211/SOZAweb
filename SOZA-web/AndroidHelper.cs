@@ -48,7 +48,7 @@ namespace SOZA_web
         {
             string newToken = "";
             while (_dbContext.AndroidClients.Any(a => a.Token == newToken) || newToken == "")
-                newToken = Convert.ToBase64String(Guid.NewGuid().ToByteArray()).Substring(0, 8);
+                newToken = Guid.NewGuid().ToString().Substring(0, 8);
 
             _dbContext.AndroidClients.Add(new AndroidClient()
             {
