@@ -29,7 +29,7 @@ namespace SOZA_web.Controllers.WebApi
             {
                 var androidHelper = new AndroidHelper(ApplicationDbContext.Create());
                 var phoneNumber = androidHelper.GetGuardianPhoneNumber(token);
-                return JsonConvert.SerializeObject(phoneNumber);
+                return phoneNumber;
             }
             catch (Exception e)
             {
