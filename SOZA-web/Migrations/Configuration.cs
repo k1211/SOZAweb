@@ -37,7 +37,11 @@ namespace SOZA_web.Migrations
             if (adminUser != null)
                 userManager.Delete(adminUser);
 
-            var newAdminUser = new ApplicationUser { UserName = defaultAdminName };
+            var newAdminUser = new ApplicationUser
+            {
+                UserName = defaultAdminName,
+                SafeLatLng = new ApplicationUser.Location()
+            };
             userManager.Create(newAdminUser, defaultAdminPass);
             userManager.AddToRole(newAdminUser.Id, adminRole);
         }
