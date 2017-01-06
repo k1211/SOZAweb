@@ -227,6 +227,10 @@
     <Compile Include="Migrations\201701021528407_SafeAreaRadius.Designer.cs">
       <DependentUpon>201701021528407_SafeAreaRadius.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201701061010581_NullableVarFix.cs" />
+    <Compile Include="Migrations\201701061010581_NullableVarFix.Designer.cs">
+      <DependentUpon>201701061010581_NullableVarFix.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Database\ApplicationUser.cs" />
     <Compile Include="Models\Database\GPSTrace.cs" />
@@ -391,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201701021528407_SafeAreaRadius.resx">
       <DependentUpon>201701021528407_SafeAreaRadius.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201701061010581_NullableVarFix.resx">
+      <DependentUpon>201701061010581_NullableVarFix.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

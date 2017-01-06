@@ -108,8 +108,6 @@ namespace SOZA_web.Controllers
 
             model.SafeLatLng = user.SafeLatLng;
             model.Radius = user.SafeAreaRadius;
-            if (model.Radius < 10)
-                model.Radius = 10;
 
             ViewBag.InputHint = "Wpisz i wyszukaj punkt celem wyznaczenia strefy bezpiecznej";
             ViewBag.InputHint2 = "... albo przeciągnij i upuść znacznik bezpośrednio na mapie.";
