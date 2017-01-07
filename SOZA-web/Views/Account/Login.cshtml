@@ -2,7 +2,7 @@
 @model LoginViewModel
 
 @{
-    ViewBag.Title = "Zaloguj się";
+    ViewBag.Title = @SOZA_web.Resources.HomeTexts.Login;
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -46,7 +46,7 @@
                 </div>
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Zaloguj się" class="btn btn-default" />
+                        <input type="submit" value=@SOZA_web.Resources.HomeTexts.Login class="btn btn-default" />
                     </div>
      </div>
 
@@ -59,9 +59,9 @@
     </div>
 
     <div class="col-md-5">
-        <h3> Nie posiadasz jeszcze konta? </h3>
+        <h3> @SOZA_web.Resources.HomeTexts.NoAccount </h3>
         <p>
-            @Html.ActionLink("Zarejestruj się", "Register")
+            @Html.ActionLink(@SOZA_web.Resources.HomeTexts.Register, "Register")
         </p>
     </div>
    

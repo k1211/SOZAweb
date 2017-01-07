@@ -1,6 +1,6 @@
 ﻿@model SOZA_web.Models.IndexViewModel
 @{
-    ViewBag.Title = "Konto użytkownika";
+    ViewBag.Title = @SOZA_web.Resources.HomeTexts.UserAccount;
 }
 
 <h2>Zmień ustawienia konta</h2>
@@ -15,11 +15,11 @@
             [
             @if (Model.HasPassword)
             {
-                @Html.ActionLink("Zmień hasło", "ChangePassword")
+                @Html.ActionLink(@SOZA_web.Resources.HomeTexts.ChangePassword, "ChangePassword")
             }
             else
             {
-                @Html.ActionLink("Ustaw hasło", "SetPassword")
+                @Html.ActionLink(@SOZA_web.Resources.HomeTexts.SetPassword, "SetPassword")
             }
             ]
         </dd>
@@ -30,7 +30,7 @@
     @if (Model.PhoneNumber != null)
     {
         <br />
-                    <text>[&nbsp;&nbsp;@Html.ActionLink("Zmień", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+                    <text>[&nbsp;&nbsp;@Html.ActionLink(@SOZA_web.Resources.HomeTexts.Change, "AddPhoneNumber")&nbsp;&nbsp;]</text>
         using (Html.BeginForm("RemovePhoneNumber", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             @Html.AntiForgeryToken()
@@ -39,7 +39,7 @@
     }
     else
     {
-        <text>[&nbsp;&nbsp;@Html.ActionLink("Dodaj numer telefonu", "AddPhoneNumber")&nbsp;&nbsp;]</text>
+        <text>[&nbsp;&nbsp;@Html.ActionLink(@SOZA_web.Resources.HomeTexts.AddPhoneNumber, "AddPhoneNumber")&nbsp;&nbsp;]</text>
     }
     </dd>
 

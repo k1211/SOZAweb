@@ -1,5 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Globalization;
+using System.Resources;
+
 
 namespace SOZA_web.Models
 {
@@ -82,7 +85,7 @@ namespace SOZA_web.Models
 
         [Required]
         [DataType(DataType.Text)]
-        [Display(Name = "Token Androida")]
+        [Display(Name = "Token")]
         public string AndroidToken { get; set; }
     }
 

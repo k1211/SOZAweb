@@ -21,13 +21,15 @@
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Strona główna", "Index", "Home")</li>
-                    <li>@Html.ActionLink("O nas", "About", "Home")</li>
-                    <li>@Html.ActionLink("O projekcie", "AboutProject", "Home")</li>
+                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.Index, "Index", "Home")</li>
+                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.AboutUs, "About", "Home")</li>
+                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.AboutProject, "AboutProject", "Home")</li>
+                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.LanguagePL, "change", "Language", new { LanguageAbbreviation = "pl" }, null)</li>
+                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.LanguageEN, "change", "Language", new { LanguageAbbreviation = "en" }, null)</li>
                     @if (Request.IsAuthenticated)
                     {
-                        <li>@Html.ActionLink("Historia lokalizacji", "LocationHistory", "Map")</li>
-                        <li>@Html.ActionLink("Panel Stref Bezpiecznych", "SafeAreasPanel", "Map")</li>
+                        <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.History, "LocationHistory", "Map")</li>
+                        <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.SafeZone, "SafeAreasPanel", "Map")</li>
                     }
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -39,7 +41,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>SOZA - Strażnik Osoby z Zespołem Alzheimera</p>
+            <p>@SOZA_web.Resources.HomeTexts.Description</p>
         </footer>
     </div>
 

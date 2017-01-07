@@ -1,6 +1,6 @@
 ﻿@model SOZA_web.Models.RegisterViewModel
 @{
-    ViewBag.Title = "Zarejestruj się";
+    ViewBag.Title = @SOZA_web.Resources.HomeTexts.Register;
 }
 
 <h2>@ViewBag.Title.</h2>
@@ -37,7 +37,7 @@
     </div>
     <div class="form-group">
         <div class="col-md-offset-2 col-md-10">
-            <input type="submit" class="btn btn-default" value="Zarejestruj się" />
+            <input type="submit" class="btn btn-default" value=@SOZA_web.Resources.HomeTexts.Register />
         </div>
     </div>
 }

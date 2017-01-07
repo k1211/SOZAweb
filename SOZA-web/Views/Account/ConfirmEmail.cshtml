@@ -1,9 +1,9 @@
 ﻿@{
-    ViewBag.Title = "Potwierdzenie adresu e-mail";
+    ViewBag.Title = @SOZA_web.Resources.HomeTexts.Confirmation;
 }
 
 <div>
     <p>
-       Dziękujemy za potwierdzenie adresu e-mail. @Html.ActionLink("Kliknij tu aby się zalogować", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
+      @SOZA_web.Resources.HomeTexts.ThankYou @Html.ActionLink(@SOZA_web.Resources.HomeTexts.PressHere, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })
     </p>
 </div>
