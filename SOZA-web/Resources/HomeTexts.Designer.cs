@@ -133,6 +133,15 @@ namespace SOZA_web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm password.
+        /// </summary>
+        public static string ConfirmPass {
+            get {
+                return ResourceManager.GetString("ConfirmPass", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SOZA - Guardian for Alzheimer Dieseased.
         /// </summary>
         public static string Description {
@@ -300,6 +309,15 @@ namespace SOZA_web.Resources {
         public static string RememberBrowser {
             get {
                 return ResourceManager.GetString("RememberBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
         

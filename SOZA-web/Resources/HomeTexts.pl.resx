@@ -226,4 +226,10 @@ mapie cyfrowej.</value>
   <data name="YourNumber" xml:space="preserve">
     <value>Twój numer telefonu</value>
   </data>
+  <data name="ConfirmPass" xml:space="preserve">
+    <value>Potwierdź hasło</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Zapamiętaj mnie</value>
+  </data>
 </root>

@@ -36,7 +36,7 @@ namespace SOZA_web.Models
         public string Code { get; set; }
         public string ReturnUrl { get; set; }
 
-        [Display(Name = "Zapamiętać tą przeglądarkę?")]
+        [Display(ResourceType = typeof(Resources.HomeTexts), Name = "RememberBrowser")]
         public bool RememberBrowser { get; set; }
 
         public bool RememberMe { get; set; }
@@ -58,10 +58,10 @@ namespace SOZA_web.Models
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Hasło")]
+        [Display(ResourceType = typeof(Resources.HomeTexts), Name = "Password")]
         public string Password { get; set; }
 
-        [Display(Name = "Zapamiętaj mnie")]
+        [Display(ResourceType = typeof(Resources.HomeTexts), Name = "RememberMe")]
         public bool RememberMe { get; set; }
     }
 
@@ -75,11 +75,11 @@ namespace SOZA_web.Models
         [Required]
         [StringLength(100, ErrorMessage = "{0} musi mieć przynajmniej {2} znaków.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Hasło")]
+        [Display(ResourceType = typeof(Resources.HomeTexts), Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
-        [Display(Name = "Potwierdź hasło")]
+        [Display(ResourceType = typeof(Resources.HomeTexts), Name = "ConfirmPass")]
         [Compare("Password", ErrorMessage = "Hasła nie są takie same. Wpisz ponownie.")]
         public string ConfirmPassword { get; set; }
 
@@ -99,7 +99,7 @@ namespace SOZA_web.Models
         [Required]
         [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 6)]
         [DataType(DataType.Password)]
-        [Display(Name = "Hasło")]
+        [Display(ResourceType = typeof(Resources.HomeTexts), Name = "Password")]
         public string Password { get; set; }
 
         [DataType(DataType.Password)]
