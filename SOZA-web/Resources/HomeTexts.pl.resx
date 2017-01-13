@@ -232,4 +232,10 @@ mapie cyfrowej.</value>
   <data name="RememberMe" xml:space="preserve">
     <value>Zapamiętaj mnie</value>
   </data>
+  <data name="LogOut" xml:space="preserve">
+    <value>Wyloguj się</value>
+  </data>
+  <data name="String1" xml:space="preserve">
+    <value />
+  </data>
 </root>

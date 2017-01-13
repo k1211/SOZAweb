@@ -16,7 +16,7 @@
                 @Html.ActionLink(@SOZA_web.Resources.HomeTexts.Hello + ' ' + User.Identity.GetUserName() + "!", "Index", "Manage", routeValues: null, htmlAttributes: new {title = @SOZA_web.Resources.HomeTexts.Account})
             }
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">Wyloguj się</a></li>
+        <li><a href="javascript:document.getElementById('logoutForm').submit()">@SOZA_web.Resources.HomeTexts.LogOut</a></li>
     </ul>
     }
 }

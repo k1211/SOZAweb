@@ -241,6 +241,15 @@ namespace SOZA_web.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log out.
+        /// </summary>
+        public static string LogOut {
+            get {
+                return ResourceManager.GetString("LogOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The purpose of the project is to design and implement the system controlling the movement of people with Alzheimer assuming that it is equipped with a charged mobile phone. The system should alert the family member of the patient when he leaves the particular place of residence (through SMS) and highlight its current location on a map..
         /// </summary>
         public static string LongDesc {
