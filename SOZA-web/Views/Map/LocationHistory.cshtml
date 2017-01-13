@@ -19,6 +19,9 @@
     </div>
 }
 
+<div class="SafeLatLng" data-latitude="@(Model.safearea.SafeLatLng.lat)" data-longitude="@(Model.safearea.SafeLatLng.lng)"></div>
+<div class="Radius" value="@(Model.safearea.Radius)"></div>
+
 <style>
     .infoDiv {
         height: 5%;
@@ -41,6 +44,9 @@
         var Locs = $(".Loc");
         var Coord = new Array();
         var Markers = new Array();
+        var LatT = Number(String($(".SafeLatLng").attr("data-latitude")).replace(",", "."));
+        var LongT = Number(String($(".SafeLatLng").attr("data-longitude")).replace(",", "."));
+        var SafeAreaLatLng = new google.maps.LatLng(LatT, LongT);
 
        var mapOptions = {
             zoom: 17,

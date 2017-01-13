@@ -17,73 +17,25 @@ namespace SOZA_web.Controllers
     {
         public ActionResult LocationHistory()
         {
-
-            //Set loc in Map model through GPS Trace DB list2.Add(new Test() { A = 3, B = "Sarah" });
             var model = new Map
             {
-                Loc = new List<Location>()
+                Loc = new List<Location>(),
+                Date = new List<DateTime>()
             };
-
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.3715175,
-                Longitude = 18.6126851,
-                Timestamp = DateTime.Now.AddMinutes(54)
-            });
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.3726143,
-                Longitude = 18.613522,
-                Timestamp = DateTime.Now.AddMinutes(48)
-            });
-            model.Loc.Add(new Location()
-            {
-                Caption = "test3",
-                Latitude = 54.3721956,
-                Longitude = 18.6155014,
-                Timestamp = DateTime.Now.AddMinutes(41)
-            });
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.3730332,
-                Longitude = 18.6160891,
-                Timestamp = DateTime.Now.AddMinutes(37)
-            });
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.3729893,
-                Longitude = 18.6162471,
-                Timestamp = DateTime.Now.AddMinutes(32)
-            });
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.37258,
-                Longitude = 18.6161827,
-                Timestamp = DateTime.Now.AddMinutes(26)
-            });
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.3722331,
-                Longitude = 18.6166762,
-                Timestamp = DateTime.Now.AddMinutes(15)
-            });
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.3717394,
-                Longitude = 18.6166601,
-                Timestamp = DateTime.Now.AddMinutes(7)
-            });
-            model.Loc.Add(new Location()
-            {
-                Latitude = 54.3712851,
-                Longitude = 18.6166806,
-                Timestamp = DateTime.Now
-            });
-           // ApplicationUser user = System.Web.HttpContext.Current.GetOwinContext().GetUserManager<ApplicationUserManager>().FindById(System.Web.HttpContext.Current.User.Identity.GetUserId());
-
+            string username = User.Identity.Name;
             var db = ApplicationDbContext.Create();
+
+            ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName.Equals(username));
+            model.safearea = new SafeArea { SafeLatLng = new ApplicationUser.Location() };
+
+            model.safearea.SafeLatLng = user.SafeLatLng;
+            model.safearea.Radius = user.SafeAreaRadius;
+
             var GPSTraces = db.GPSTraces;
 
+            //Load all GPSTraces to the view - you can filter them by day in this point 
+            //(but you have to maintain View<->Model connection to update Map in Controller after selecting different day)
+            //or just pass whole list to View and then filter them in View based on model.Date list
             foreach(var row in GPSTraces.ToList())
             {
                 Location locationDb = new Location
@@ -93,7 +45,11 @@ namespace SOZA_web.Controllers
                 };
                 model.Loc.Add(locationDb);
             }
-
+            //Date list used to create list of days with traces
+            foreach(var row in GPSTraces.Select(d => d.Timestamp.Date).Distinct())
+            {
+                model.Date.Add(row);
+            }
             return View(model);
         }
 

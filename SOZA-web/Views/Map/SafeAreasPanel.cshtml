@@ -146,7 +146,7 @@
             var SafeAreaLatLng = new google.maps.LatLng(Lat, Long);
             var map;
             var Marker;
-            var radius;
+            var radius = Number(String($(".Radius").attr("value")).replace(",", "."));
             var SafeArea = new google.maps.Circle({
                 strokeColor: '#FF0000',
                 strokeOpacity: 0.8,

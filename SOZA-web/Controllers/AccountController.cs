@@ -155,10 +155,12 @@ namespace SOZA_web.Controllers
                 var androidHelper = new AndroidHelper(ApplicationDbContext.Create());
                 if (androidHelper.IsValidToken(androidToken))
                 {
+                    //Complex type are required to be initiliazed (or it will throw non-nullable variable is null error)
                     var user = new ApplicationUser { UserName = model.Email, Email = model.Email, SafeLatLng = new ApplicationUser.Location(), SafeAreaRadius = 10};
                     var result = await UserManager.CreateAsync(user, model.Password);
                     if (result.Succeeded)
                     {
+                        //Non required anymore, but I leave that just in case
                         user.SafeLatLng.lat = 54.3715175;
                         user.SafeLatLng.lng = 18.6126851;
                         androidHelper.RegisterUserToken(user.Id, androidToken);
