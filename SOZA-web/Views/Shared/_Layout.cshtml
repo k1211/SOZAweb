@@ -22,13 +22,15 @@
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.AboutProject, "AboutProject", "Home")</li>
-                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.LanguagePL, "change", "Language", new { LanguageAbbreviation = "pl" }, null)</li>
-                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.LanguageEN, "change", "Language", new { LanguageAbbreviation = "en" }, null)</li>
+                    
                     @if (Request.IsAuthenticated)
                     {
                         <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.History, "LocationHistory", "Map")</li>
                         <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.SafeZone, "SafeAreasPanel", "Map")</li>
                     }
+                    <li> <p></p> </li>
+                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.LanguagePL, "change", "Language", new { LanguageAbbreviation = "pl" }, null)</li>
+                    <li>@Html.ActionLink(SOZA_web.Resources.HomeTexts.LanguageEN, "change", "Language", new { LanguageAbbreviation = "en" }, null)</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>
