@@ -31,6 +31,62 @@ namespace SOZA_web.Controllers
             model.safearea.SafeLatLng = user.SafeLatLng;
             model.safearea.Radius = user.SafeAreaRadius;
 
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3715175,
+                Longitude = 18.6126851,
+                Timestamp = DateTime.Now.AddMinutes(-54)
+            });
+            model.Loc.Add(new Location()
+        {
+            Latitude = 54.3726143,
+                Longitude = 18.613522,
+                Timestamp = DateTime.Now.AddMinutes(-48)
+            });
+            model.Loc.Add(new Location()
+        {
+            Caption = "test3",
+            Latitude = 54.3721956,
+                Longitude = 18.6155014,
+                Timestamp = DateTime.Now.AddMinutes(-41)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3730332,
+                Longitude = 18.6160891,
+                Timestamp = DateTime.Now.AddMinutes(-37)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3729893,
+                Longitude = 18.6162471,
+                Timestamp = DateTime.Now.AddMinutes(-32)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.37258,
+                Longitude = 18.6161827,
+                Timestamp = DateTime.Now.AddMinutes(-26)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3722331,
+                Longitude = 18.6166762,
+                Timestamp = DateTime.Now.AddMinutes(-15)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3717394,
+                Longitude = 18.6166601,
+                Timestamp = DateTime.Now.AddMinutes(-7)
+            });
+            model.Loc.Add(new Location()
+            {
+                Latitude = 54.3712851,
+                Longitude = 18.6166806,
+                Timestamp = DateTime.Now
+            });
+
             var GPSTraces = db.GPSTraces;
 
             //Load all GPSTraces to the view - you can filter them by day in this point 
@@ -45,11 +101,11 @@ namespace SOZA_web.Controllers
                 };
                 model.Loc.Add(locationDb);
             }
-            //Date list used to create list of days with traces
+          /*  //Date list used to create list of days with traces
             foreach(var row in GPSTraces.Select(d => d.Timestamp.Date).Distinct())
             {
                 model.Date.Add(row);
-            }
+            }*/
             return View(model);
         }
 
